@@ -109,7 +109,7 @@ Once Claude Code starts, run `/context`. You should see:
 ```
 Context Usage
 ⛁ ⛁ ⛁ ⛁ ⛁ ⛁ ⛁ ⛁ ⛁ ⛁   deepseek-v4-pro
-⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶   15.2k/1000k tokens (1.5%)
+⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶   15.2k/1m tokens (1.5%)
 ```
 
 If the top bar shows **1000k** (1 million), you're good to go.
