@@ -14,9 +14,9 @@ Run Claude Code at full capability - file I/O, terminal commands, MCP tools, sub
 ## Prerequisites
 
 - **Node.js** ≥ 18 - [nodejs.org](https://nodejs.org)
-- **Claude Code** installed globally:
+- **Claude Code** `v2.1.154` installed globally:
   ```powershell
-  npm install -g @anthropic-ai/claude-code
+  npm install -g @anthropic-ai/claude-code@2.1.154
   ```
 - **DeepSeek API key** - [platform.deepseek.com/api_keys](https://platform.deepseek.com/api_keys)
 
