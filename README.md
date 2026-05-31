@@ -1,6 +1,6 @@
-# Claude Code with DeepSeek API — 1M Context Window
+# Claude Code with DeepSeek API - 1M Context Window
 
-Run Claude Code at full capability — file I/O, terminal commands, MCP tools, subagents — powered by **DeepSeek V4 Pro** via the Anthropic-compatible endpoint. No Anthropic API key required.
+Run Claude Code at full capability - file I/O, terminal commands, MCP tools, subagents - powered by **DeepSeek V4 Pro** via the Anthropic-compatible endpoint. No Anthropic API key required.
 
 **Platforms:** Windows · macOS · Linux
 
@@ -15,12 +15,12 @@ Run Claude Code at full capability — file I/O, terminal commands, MCP tools, s
 
 ## Prerequisites
 
-- **Node.js** ≥ 18 — [nodejs.org](https://nodejs.org)
+- **Node.js** ≥ 18 - [nodejs.org](https://nodejs.org)
 - **Claude Code** `v2.1.154` installed globally:
   ```bash
   npm install -g @anthropic-ai/claude-code@2.1.154
   ```
-- **DeepSeek API key** — [platform.deepseek.com/api_keys](https://platform.deepseek.com/api_keys)
+- **DeepSeek API key** - [platform.deepseek.com/api_keys](https://platform.deepseek.com/api_keys)
 
 ---
 
@@ -60,11 +60,11 @@ source ~/.zshrc    # or ~/.bashrc / ~/.bash_profile
 
 ## Step 2: Choose Your Launch Method
 
-Two options per platform — pick whichever fits your workflow.
+Two options per platform - pick whichever fits your workflow.
 
 ### Windows
 
-#### Method A — Batch File (`.bat`)
+#### Method A - Batch File (`.bat`)
 
 Place `deepseek.bat` in a directory on your `PATH` (e.g. `C:\Users\%USERNAME%\bin\`) and invoke it from any terminal:
 
@@ -72,7 +72,7 @@ Place `deepseek.bat` in a directory on your `PATH` (e.g. `C:\Users\%USERNAME%\bi
 deepseek
 ```
 
-#### Method B — PowerShell Global Command (Recommended)
+#### Method B - PowerShell Global Command (Recommended)
 
 Add the `deepseek` function to your PowerShell profile:
 
@@ -91,7 +91,7 @@ deepseek
 
 ### macOS / Linux
 
-#### Method A — Shell Script
+#### Method A - Shell Script
 
 Make `deepseek.sh` executable and place it on your `PATH`:
 
@@ -106,7 +106,7 @@ Then run from any directory:
 deepseek
 ```
 
-#### Method B — Shell Function (Recommended)
+#### Method B - Shell Function (Recommended)
 
 Paste the contents of `shell-profile.sh` into your shell profile (`~/.bashrc`, `~/.zshrc`, or `~/.bash_profile`):
 
@@ -122,11 +122,11 @@ Then run from any directory:
 deepseek
 ```
 
-> The shell function sets environment variables in the current session and launches Claude Code. It's lighter than a script — no extra process, no `PATH` setup needed.
+> The shell function sets environment variables in the current session and launches Claude Code. It's lighter than a script - no extra process, no `PATH` setup needed.
 
 ---
 
-## The `[1m]` Suffix — Unlocking the Full 1M Context Window
+## The `[1m]` Suffix - Unlocking the Full 1M Context Window
 
 **Critical.** Claude Code defaults to **200K** context window for any third-party model it doesn't recognize. Appending `[1m]` to the model name signals that the model supports a 1-million-token context window:
 
@@ -135,7 +135,7 @@ deepseek-v4-pro        → 200K (default)
 deepseek-v4-pro[1m]    → 1M   ✅
 ```
 
-The `[1m]` suffix is **stripped before the API request is sent** — DeepSeek's servers never see it; they receive `deepseek-v4-pro`. It is a client-side hint processed exclusively by Claude Code's `getContextWindowForModel()`.
+The `[1m]` suffix is **stripped before the API request is sent** - DeepSeek's servers never see it; they receive `deepseek-v4-pro`. It is a client-side hint processed exclusively by Claude Code's `getContextWindowForModel()`.
 
 ---
 
@@ -145,7 +145,7 @@ The `[1m]` suffix is **stripped before the API request is sent** — DeepSeek's 
 |---|---|---|
 | `ANTHROPIC_BASE_URL` | `https://api.deepseek.com/anthropic` | DeepSeek's Anthropic-compatible endpoint |
 | `ANTHROPIC_AUTH_TOKEN` | `$DEEPSEEK_API_KEY` | Your API key (read from global env var) |
-| `ANTHROPIC_MODEL` | `deepseek-v4-pro[1m]` | Primary model — `[1m]` enables 1M context |
+| `ANTHROPIC_MODEL` | `deepseek-v4-pro[1m]` | Primary model - `[1m]` enables 1M context |
 | `ANTHROPIC_DEFAULT_OPUS_MODEL` | `deepseek-v4-pro[1m]` | Model used for Opus-tier requests |
 | `ANTHROPIC_DEFAULT_SONNET_MODEL` | `deepseek-v4-pro` | Model used for Sonnet-tier requests |
 | `ANTHROPIC_DEFAULT_HAIKU_MODEL` | `deepseek-v4-flash` | Model used for Haiku-tier requests |
@@ -178,11 +178,11 @@ If the top bar shows **1m** (1 million), you're good to go.
 | | Windows | `echo $env:DEEPSEEK_API_KEY` (PowerShell) or `echo %DEEPSEEK_API_KEY%` (CMD) |
 | | macOS/Linux | `echo $DEEPSEEK_API_KEY` |
 | **`claude` command not found** | All | Reinstall: `npm install -g @anthropic-ai/claude-code@2.1.154` |
-| **`deepseek` not recognized** | Windows (PS) | `notepad $PROFILE.CurrentUserCurrentHost` — verify the function is in your profile |
+| **`deepseek` not recognized** | Windows (PS) | `notepad $PROFILE.CurrentUserCurrentHost` - verify the function is in your profile |
 | | Windows (CMD) | Ensure `deepseek.bat` is in a directory on your `PATH` |
 | | macOS/Linux | Run `type deepseek` to check if the function or script is loaded |
 | **Permission denied (script)** | macOS/Linux | `chmod +x deepseek.sh` |
-| **Thinking mode not working** | All | DeepSeek V4 Pro natively supports thinking — no extra configuration needed |
+| **Thinking mode not working** | All | DeepSeek V4 Pro natively supports thinking - no extra configuration needed |
 
 ---
 
@@ -191,13 +191,13 @@ If the top bar shows **1m** (1 million), you're good to go.
 | File | Platform | Purpose |
 |---|---|---|
 | `deepseek.bat` | Windows | Batch launcher for CMD |
-| `Microsoft.PowerShell_profile.ps1` | Windows | PowerShell function — paste into your profile |
-| `deepseek.sh` | macOS / Linux | Shell script — make executable, place on `PATH` |
-| `shell-profile.sh` | macOS / Linux | Shell function — paste into `.bashrc` / `.zshrc` |
+| `Microsoft.PowerShell_profile.ps1` | Windows | PowerShell function - paste into your profile |
+| `deepseek.sh` | macOS / Linux | Shell script - make executable, place on `PATH` |
+| `shell-profile.sh` | macOS / Linux | Shell function - paste into `.bashrc` / `.zshrc` |
 | `README.md` | All | This document |
 
 ---
 
 ## License
 
-MIT — use freely, modify, distribute.
+MIT - use freely, modify, distribute.
