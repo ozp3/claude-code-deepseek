@@ -20,10 +20,11 @@ Monthly cost        $20         $100       $200           $20                $20
 
 Est. monthly      ~1.3M        ~5M        ~9M            ~20M tokens        ~63M tokens
 token budget      tokens      tokens     tokens          (15M in +          (47M in +
-(community                                               5M out)            16M out)
+(Opus 4.6,        Opus        Opus       Opus            5M out)            16M out)
+community         4.6         4.6        4.6
 estimates)
 
-Context window     200K        200K       200K            1M                 1M
+Context window     1M          1M         1M              1M                 1M
 
 5h window cap?     ✓           ✓          ✓               --                  --
 Weekly cap?        ✓           ✓          ✓               --                  --
