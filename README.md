@@ -50,10 +50,10 @@ Anthropic applies **two simultaneous caps** -- hitting either one blocks usage:
 
 **The relationship (measured):**
 
-| | Max 5x ($100) | Max 20x ($200) | Pro ($20, estimated) |
-|---|---|---|---|
-| 1 full 5h window consumes | ~8–9% of weekly | ~15% of weekly | ~14% of weekly |
-| Full windows per week | ~12 | ~7 | ~7 |
+| | Max 20x ($200) | Max 5x ($100) |
+|---|---|---|
+| 1 full 5h window consumes | ~8–9% of weekly | ~15% of weekly |
+| Full windows per week | ~12 | ~7 |
 
 So a $200/month subscriber maxing every window can exhaust their **entire week** in ~7 sessions. The weekly cap is the binding constraint -- not the 5-hour window. Anthropic reports <5% of users hit it, but heavy Claude Code users will hit it by mid-week.
 
@@ -61,7 +61,7 @@ So a $200/month subscriber maxing every window can exhaust their **entire week**
 
 | | $20/Month Token Budget |
 |---|---|
-| **Claude Code Pro** | ~1.3M tokens (Sonnet only, then locked) |
+| **Claude Code Pro** | ~1.3M tokens (Opus 4.6, then locked) |
 | **This Setup -- V4-Pro** | ~20M tokens (15x more) |
 | **This Setup -- V4-Flash** | ~63M tokens (50x more) |
 
