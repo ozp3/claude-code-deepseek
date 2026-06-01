@@ -4,14 +4,105 @@ Run Claude Code at full capability - file I/O, terminal commands, MCP tools, sub
 
 **Platforms:** Windows · macOS · Linux
 
-## Why Use This?
+## Why Use This? -- Cost Comparison
 
-| | Anthropic Claude | This Setup (DeepSeek) |
-|---|---|---|
-| **Cost** | $20/mo (Pro) or API pay-as-you-go | DeepSeek API usage only (~$0.44/1M input tokens, promotional pricing) |
-| **Context window** | 200K | **1M** (via `[1m]` suffix) |
-| **Model** | Claude Opus / Sonnet / Haiku | DeepSeek V4 Pro / V4 Flash |
-| **Claude Code features** | All | All (thinking, tool use, subagents, MCP) |
+Claude Code subscriptions give you a **fixed token budget with double limits** (5-hour rolling window + weekly cap). DeepSeek API gives you **pure pay-as-you-go** -- no windows, no caps. Same Claude Code features, same terminal, same MCP tools.
+
+### Claude Code Plans vs. This Setup
+
+```
+                        CLAUDE CODE PLANS                    THIS SETUP (DeepSeek API)
+                  ───────────────────────────────     ──────────────────────────────────
+                        Pro       Max 5x    Max 20x        V4-Pro             V4-Flash
+                  ───────────────────────────────     ──────────────────────────────────
+Monthly cost        $20         $100       $200           $20                $20
+                                                          (pay-as-you-go)    (pay-as-you-go)
+
+Est. monthly      ~1.3M        ~5M        ~9M            ~20M tokens        ~63M tokens
+token budget      tokens      tokens     tokens          (15M in +          (47M in +
+(community                                               5M out)            16M out)
+estimates)
+
+Context window     200K        200K       200K            1M                 1M
+
+5h window cap?     ✓           ✓          ✓               --                  --
+Weekly cap?        ✓           ✓          ✓               --                  --
+Peak throttling?   throttled   throttled  throttled       --                  --
+
+Models             Opus/       Opus/      Opus/           DeepSeek           DeepSeek
+                   Sonnet/     Sonnet/    Sonnet/         V4-Pro             V4-Flash
+                   Haiku       Haiku      Haiku
+
+Token/$ value      1x          ~0.5x      ~0.45x          ~15x               ~50x
+(vs Claude Pro)
+
+Lockout risk        Weds-Thu   Thu-Fri    Fri-Sat         None               None
+(heavy week)
+```
+
+> Token estimates are based on community measurements (Feb 2026, ~3.6K API snapshots). Anthropic does **not** publish exact token limits -- they express caps in opaque "hours." The ratios above are conservative.
+
+### How Claude Code's Double Limit Works
+
+Anthropic applies **two simultaneous caps** -- hitting either one blocks usage:
+
+| Limit | Reset |
+|---|---|
+| **5-hour rolling window** | Resets 5 hours after your first prompt in the window |
+| **Weekly quota** | Resets every 7 days |
+
+**The relationship (measured):**
+
+| | Max 5x ($100) | Max 20x ($200) | Pro ($20, estimated) |
+|---|---|---|---|
+| 1 full 5h window consumes | ~8–9% of weekly | ~15% of weekly | ~14% of weekly |
+| Full windows per week | ~12 | ~7 | ~7 |
+
+So a $200/month subscriber maxing every window can exhaust their **entire week** in ~7 sessions. The weekly cap is the binding constraint -- not the 5-hour window. Anthropic reports <5% of users hit it, but heavy Claude Code users will hit it by mid-week.
+
+### What $20 Gets You
+
+| | $20/Month Token Budget |
+|---|---|
+| **Claude Code Pro** | ~1.3M tokens (Sonnet only, then locked) |
+| **This Setup -- V4-Pro** | ~20M tokens (15x more) |
+| **This Setup -- V4-Flash** | ~63M tokens (50x more) |
+
+No lockouts, no weekly reset to wait for, 1M context window. Same Claude Code interface.
+
+## Model Performance -- DeepSeek V4-Pro Max vs Frontier Models
+
+Benchmark data from [DeepSeek V4 Pro (HuggingFace)](https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro). **Bold** = best in row. `--` = not reported. DS-V4-Pro is the model used in this setup (Max is the API tier with thinking enabled).
+
+| Benchmark | Opus-4.6 Max | GPT-5.4 xHigh | Gemini-3.1-Pro High | K2.6 Thinking | GLM-5.1 Thinking | DS-V4-Pro Max |
+|---|---|---|---|---|---|---|
+| **Knowledge & Reasoning** | | | | | | |
+| MMLU-Pro (EM) | 89.1 | 87.5 | **91.0** | 87.1 | 86.0 | 87.5 |
+| SimpleQA-Verified (Pass@1) | 46.2 | 45.3 | **75.6** | 36.9 | 38.1 | 57.9 |
+| Chinese-SimpleQA (Pass@1) | 76.4 | 76.8 | **85.9** | 75.9 | 75.0 | 84.4 |
+| GPQA Diamond (Pass@1) | 91.3 | 93.0 | **94.3** | 90.5 | 86.2 | 90.1 |
+| HLE (Pass@1) | 40.0 | 39.8 | **44.4** | 36.4 | 34.7 | 37.7 |
+| LiveCodeBench (Pass@1) | 88.8 | -- | 91.7 | 89.6 | -- | **93.5** |
+| Codeforces (Rating) | -- | 3168 | 3052 | -- | -- | **3206** |
+| HMMT 2026 Feb (Pass@1) | 96.2 | **97.7** | 94.7 | 92.7 | 89.4 | 95.2 |
+| IMOAnswerBench (Pass@1) | 75.3 | **91.4** | 81.0 | 86.0 | 83.8 | 89.8 |
+| Apex (Pass@1) | 34.5 | 54.1 | **60.9** | 24.0 | 11.5 | 38.3 |
+| Apex Shortlist (Pass@1) | 85.9 | 78.1 | 89.1 | 75.5 | 72.4 | **90.2** |
+| **Long Context** | | | | | | |
+| MRCR 1M (MMR) | **92.9** | -- | 76.3 | -- | -- | 83.5 |
+| CorpusQA 1M (ACC) | **71.7** | -- | 53.8 | -- | -- | 62.0 |
+| **Agentic** | | | | | | |
+| Terminal Bench 2.0 (Acc) | 65.4 | **75.1** | 68.5 | 66.7 | 63.5 | 67.9 |
+| SWE Verified (Resolved) | **80.8** | -- | 80.6 | 80.2 | -- | 80.6 |
+| SWE Pro (Resolved) | 57.3 | 57.7 | 54.2 | **58.6** | 58.4 | 55.4 |
+| SWE Multilingual (Resolved) | **77.5** | -- | -- | 76.7 | 73.3 | 76.2 |
+| BrowseComp (Pass@1) | 83.7 | 82.7 | **85.9** | 83.2 | 79.3 | 83.4 |
+| HLE w/ tools (Pass@1) | 53.1 | 52.0 | 51.6 | **54.0** | 50.4 | 48.2 |
+| GDPval-AA (Elo) | 1619 | **1674** | 1314 | 1482 | 1535 | 1554 |
+| MCPAtlas Public (Pass@1) | **73.8** | 67.2 | 69.2 | 66.6 | 71.8 | 73.6 |
+| Toolathlon (Pass@1) | 47.2 | **54.6** | 48.8 | 50.0 | 40.7 | 51.8 |
+
+Key takeaways: DS-V4-Pro leads on coding benchmarks (LiveCodeBench 93.5, Codeforces 3206, Apex Shortlist 90.2). Competitive on SWE and agentic tasks. Gemini-3.1-Pro High dominates knowledge/reasoning. Claude Opus-4.6 Max leads long-context retrieval and SWE Verified.
 
 ## Prerequisites
 
