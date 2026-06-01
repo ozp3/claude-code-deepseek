@@ -104,9 +104,9 @@ Key takeaways: DS-V4-Pro leads on coding benchmarks (LiveCodeBench 93.5, Codefor
 ## Prerequisites
 
 - **Node.js** ≥ 18 - [nodejs.org](https://nodejs.org)
-- **Claude Code** `v2.1.154` installed globally:
+- **Claude Code** `v2.1.159` installed globally:
   ```bash
-  npm install -g @anthropic-ai/claude-code@2.1.154
+  npm install -g @anthropic-ai/claude-code@2.1.159
   ```
 - **DeepSeek API key** - [platform.deepseek.com/api_keys](https://platform.deepseek.com/api_keys)
 
