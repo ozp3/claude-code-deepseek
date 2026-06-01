@@ -30,10 +30,6 @@ Context window     1M          1M         1M              1M                 1M
 Weekly cap?        ✓           ✓          ✓               --                  --
 Peak throttling?   throttled   throttled  throttled       --                  --
 
-Models             Opus/       Opus/      Opus/           DeepSeek           DeepSeek
-                   Sonnet/     Sonnet/    Sonnet/         V4-Pro             V4-Flash
-                   Haiku       Haiku      Haiku
-
 Token/$ value      1x          ~0.5x      ~0.45x          ~15x               ~50x
 (vs Claude Pro)
 
