@@ -43,27 +43,27 @@ Lockout risk        Weds-Thu   Thu-Fri    Fri-Sat         None               Non
 
 Anthropic applies **two simultaneous caps** -- hitting either one blocks usage:
 
-| Limit | Reset |
-|---|---|
+| Limit                     | Reset                                                |
+| ------------------------- | ---------------------------------------------------- |
 | **5-hour rolling window** | Resets 5 hours after your first prompt in the window |
-| **Weekly quota** | Resets every 7 days |
+| **Weekly quota**          | Resets every 7 days                                  |
 
-**The relationship (measured):**
+**The relationship (measured across 3,664 API snapshots, ~95% Opus usage):**
 
-| | Max 20x ($200) | Max 5x ($100) |
-|---|---|---|
-| 1 full 5h window consumes | ~8–9% of weekly | ~15% of weekly |
-| Full windows per week | ~12 | ~7 |
+|                           | Max 5x ($100)   | Max 20x ($200)   |
+| ------------------------- | --------------- | ---------------- |
+| 1 full 5h window consumes | ~8-9% of weekly | ~15% of weekly   |
+| Full windows per week     | ~12             | ~7               |
 
-So a $200/month subscriber maxing every window can exhaust their **entire week** in ~7 sessions. The weekly cap is the binding constraint -- not the 5-hour window. Anthropic reports <5% of users hit it, but heavy Claude Code users will hit it by mid-week.
+Max 20x gives you **4x the 5-hour burst** of Max 5x, but only **~2.1x the weekly budget**. You go faster, not longer -- which is why each window burns a bigger chunk of the week (15% vs 8-9%). The name "20x" refers to burst capacity relative to the Pro plan, not weekly sustained throughput.
 
 ### What $20 Gets You
 
-| | $20/Month Token Budget |
-|---|---|
-| **Claude Code Pro** | ~1.3M tokens (Opus 4.6, then locked) |
-| **This Setup -- V4-Pro** | ~20M tokens (15x more) |
-| **This Setup -- V4-Flash** | ~63M tokens (50x more) |
+|                            | $20/Month Token Budget               |
+| -------------------------- | ------------------------------------ |
+| **Claude Code Pro**        | ~1.3M tokens (Opus 4.6, then locked) |
+| **This Setup -- V4-Pro**   | ~20M tokens (15x more)               |
+| **This Setup -- V4-Flash** | ~63M tokens (50x more)               |
 
 No lockouts, no weekly reset to wait for, 1M context window. Same Claude Code interface.
 
@@ -71,33 +71,33 @@ No lockouts, no weekly reset to wait for, 1M context window. Same Claude Code in
 
 Benchmark data from [DeepSeek V4 Pro (HuggingFace)](https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro). **Bold** = best in row. `--` = not reported. DS-V4-Pro is the model used in this setup (Max is the API tier with thinking enabled).
 
-| Benchmark | Opus-4.6 Max | GPT-5.4 xHigh | Gemini-3.1-Pro High | K2.6 Thinking | GLM-5.1 Thinking | DS-V4-Pro Max |
-|---|---|---|---|---|---|---|
-| **Knowledge & Reasoning** | | | | | | |
-| MMLU-Pro (EM) | 89.1 | 87.5 | **91.0** | 87.1 | 86.0 | 87.5 |
-| SimpleQA-Verified (Pass@1) | 46.2 | 45.3 | **75.6** | 36.9 | 38.1 | 57.9 |
-| Chinese-SimpleQA (Pass@1) | 76.4 | 76.8 | **85.9** | 75.9 | 75.0 | 84.4 |
-| GPQA Diamond (Pass@1) | 91.3 | 93.0 | **94.3** | 90.5 | 86.2 | 90.1 |
-| HLE (Pass@1) | 40.0 | 39.8 | **44.4** | 36.4 | 34.7 | 37.7 |
-| LiveCodeBench (Pass@1) | 88.8 | -- | 91.7 | 89.6 | -- | **93.5** |
-| Codeforces (Rating) | -- | 3168 | 3052 | -- | -- | **3206** |
-| HMMT 2026 Feb (Pass@1) | 96.2 | **97.7** | 94.7 | 92.7 | 89.4 | 95.2 |
-| IMOAnswerBench (Pass@1) | 75.3 | **91.4** | 81.0 | 86.0 | 83.8 | 89.8 |
-| Apex (Pass@1) | 34.5 | 54.1 | **60.9** | 24.0 | 11.5 | 38.3 |
-| Apex Shortlist (Pass@1) | 85.9 | 78.1 | 89.1 | 75.5 | 72.4 | **90.2** |
-| **Long Context** | | | | | | |
-| MRCR 1M (MMR) | **92.9** | -- | 76.3 | -- | -- | 83.5 |
-| CorpusQA 1M (ACC) | **71.7** | -- | 53.8 | -- | -- | 62.0 |
-| **Agentic** | | | | | | |
-| Terminal Bench 2.0 (Acc) | 65.4 | **75.1** | 68.5 | 66.7 | 63.5 | 67.9 |
-| SWE Verified (Resolved) | **80.8** | -- | 80.6 | 80.2 | -- | 80.6 |
-| SWE Pro (Resolved) | 57.3 | 57.7 | 54.2 | **58.6** | 58.4 | 55.4 |
-| SWE Multilingual (Resolved) | **77.5** | -- | -- | 76.7 | 73.3 | 76.2 |
-| BrowseComp (Pass@1) | 83.7 | 82.7 | **85.9** | 83.2 | 79.3 | 83.4 |
-| HLE w/ tools (Pass@1) | 53.1 | 52.0 | 51.6 | **54.0** | 50.4 | 48.2 |
-| GDPval-AA (Elo) | 1619 | **1674** | 1314 | 1482 | 1535 | 1554 |
-| MCPAtlas Public (Pass@1) | **73.8** | 67.2 | 69.2 | 66.6 | 71.8 | 73.6 |
-| Toolathlon (Pass@1) | 47.2 | **54.6** | 48.8 | 50.0 | 40.7 | 51.8 |
+| Benchmark                   | Opus-4.6 Max | GPT-5.4 xHigh | Gemini-3.1-Pro High | K2.6 Thinking | GLM-5.1 Thinking | DS-V4-Pro Max |
+| --------------------------- | ------------ | ------------- | ------------------- | ------------- | ---------------- | ------------- |
+| **Knowledge & Reasoning**   |              |               |                     |               |                  |               |
+| MMLU-Pro (EM)               | 89.1         | 87.5          | **91.0**            | 87.1          | 86.0             | 87.5          |
+| SimpleQA-Verified (Pass@1)  | 46.2         | 45.3          | **75.6**            | 36.9          | 38.1             | 57.9          |
+| Chinese-SimpleQA (Pass@1)   | 76.4         | 76.8          | **85.9**            | 75.9          | 75.0             | 84.4          |
+| GPQA Diamond (Pass@1)       | 91.3         | 93.0          | **94.3**            | 90.5          | 86.2             | 90.1          |
+| HLE (Pass@1)                | 40.0         | 39.8          | **44.4**            | 36.4          | 34.7             | 37.7          |
+| LiveCodeBench (Pass@1)      | 88.8         | --            | 91.7                | 89.6          | --               | **93.5**      |
+| Codeforces (Rating)         | --           | 3168          | 3052                | --            | --               | **3206**      |
+| HMMT 2026 Feb (Pass@1)      | 96.2         | **97.7**      | 94.7                | 92.7          | 89.4             | 95.2          |
+| IMOAnswerBench (Pass@1)     | 75.3         | **91.4**      | 81.0                | 86.0          | 83.8             | 89.8          |
+| Apex (Pass@1)               | 34.5         | 54.1          | **60.9**            | 24.0          | 11.5             | 38.3          |
+| Apex Shortlist (Pass@1)     | 85.9         | 78.1          | 89.1                | 75.5          | 72.4             | **90.2**      |
+| **Long Context**            |              |               |                     |               |                  |               |
+| MRCR 1M (MMR)               | **92.9**     | --            | 76.3                | --            | --               | 83.5          |
+| CorpusQA 1M (ACC)           | **71.7**     | --            | 53.8                | --            | --               | 62.0          |
+| **Agentic**                 |              |               |                     |               |                  |               |
+| Terminal Bench 2.0 (Acc)    | 65.4         | **75.1**      | 68.5                | 66.7          | 63.5             | 67.9          |
+| SWE Verified (Resolved)     | **80.8**     | --            | 80.6                | 80.2          | --               | 80.6          |
+| SWE Pro (Resolved)          | 57.3         | 57.7          | 54.2                | **58.6**      | 58.4             | 55.4          |
+| SWE Multilingual (Resolved) | **77.5**     | --            | --                  | 76.7          | 73.3             | 76.2          |
+| BrowseComp (Pass@1)         | 83.7         | 82.7          | **85.9**            | 83.2          | 79.3             | 83.4          |
+| HLE w/ tools (Pass@1)       | 53.1         | 52.0          | 51.6                | **54.0**      | 50.4             | 48.2          |
+| GDPval-AA (Elo)             | 1619         | **1674**      | 1314                | 1482          | 1535             | 1554          |
+| MCPAtlas Public (Pass@1)    | **73.8**     | 67.2          | 69.2                | 66.6          | 71.8             | 73.6          |
+| Toolathlon (Pass@1)         | 47.2         | **54.6**      | 48.8                | 50.0          | 40.7             | 51.8          |
 
 Key takeaways: DS-V4-Pro leads on coding benchmarks (LiveCodeBench 93.5, Codeforces 3206, Apex Shortlist 90.2). Competitive on SWE and agentic tasks. Gemini-3.1-Pro High dominates knowledge/reasoning. Claude Opus-4.6 Max leads long-context retrieval and SWE Verified.
 
@@ -229,17 +229,17 @@ The `[1m]` suffix is **stripped before the API request is sent** - DeepSeek's se
 
 ## Environment Variables Reference
 
-| Variable | Value | Purpose |
-|---|---|---|
-| `ANTHROPIC_BASE_URL` | `https://api.deepseek.com/anthropic` | DeepSeek's Anthropic-compatible endpoint |
-| `ANTHROPIC_AUTH_TOKEN` | `$DEEPSEEK_API_KEY` | Your API key (read from global env var) |
-| `ANTHROPIC_MODEL` | `deepseek-v4-pro[1m]` | Primary model - `[1m]` enables 1M context |
-| `ANTHROPIC_DEFAULT_OPUS_MODEL` | `deepseek-v4-pro[1m]` | Model used for Opus-tier requests |
-| `ANTHROPIC_DEFAULT_SONNET_MODEL` | `deepseek-v4-pro` | Model used for Sonnet-tier requests |
-| `ANTHROPIC_DEFAULT_HAIKU_MODEL` | `deepseek-v4-flash` | Model used for Haiku-tier requests |
-| `CLAUDE_CODE_SUBAGENT_MODEL` | `deepseek-v4-flash` | Faster/cheaper model for subagents |
-| `CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC` | `1` | Disable telemetry and non-essential network calls |
-| `DISABLE_GROWTHBOOK` | `1` | Disable GrowthBook feature flags |
+| Variable                                   | Value                                | Purpose                                           |
+| ------------------------------------------ | ------------------------------------ | ------------------------------------------------- |
+| `ANTHROPIC_BASE_URL`                       | `https://api.deepseek.com/anthropic` | DeepSeek's Anthropic-compatible endpoint          |
+| `ANTHROPIC_AUTH_TOKEN`                     | `$DEEPSEEK_API_KEY`                  | Your API key (read from global env var)           |
+| `ANTHROPIC_MODEL`                          | `deepseek-v4-pro[1m]`                | Primary model - `[1m]` enables 1M context         |
+| `ANTHROPIC_DEFAULT_OPUS_MODEL`             | `deepseek-v4-pro[1m]`                | Model used for Opus-tier requests                 |
+| `ANTHROPIC_DEFAULT_SONNET_MODEL`           | `deepseek-v4-pro`                    | Model used for Sonnet-tier requests               |
+| `ANTHROPIC_DEFAULT_HAIKU_MODEL`            | `deepseek-v4-flash`                  | Model used for Haiku-tier requests                |
+| `CLAUDE_CODE_SUBAGENT_MODEL`               | `deepseek-v4-flash`                  | Faster/cheaper model for subagents                |
+| `CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC` | `1`                                  | Disable telemetry and non-essential network calls |
+| `DISABLE_GROWTHBOOK`                       | `1`                                  | Disable GrowthBook feature flags                  |
 
 ---
 
@@ -259,30 +259,30 @@ If the top bar shows **1m** (1 million), you're good to go.
 
 ## Troubleshooting
 
-| Issue | Platform | Solution |
-|---|---|---|
-| **Context shows 200K instead of 1M** | All | Verify the `[1m]` suffix is present in `ANTHROPIC_MODEL` |
-| **API authentication error** | All | Confirm `DEEPSEEK_API_KEY` is set |
-| | Windows | `echo $env:DEEPSEEK_API_KEY` (PowerShell) or `echo %DEEPSEEK_API_KEY%` (CMD) |
-| | macOS/Linux | `echo $DEEPSEEK_API_KEY` |
-| **`claude` command not found** | All | Reinstall: `npm install -g @anthropic-ai/claude-code@2.1.154` |
-| **`deepseek` not recognized** | Windows (PS) | `notepad $PROFILE.CurrentUserCurrentHost` - verify the function is in your profile |
-| | Windows (CMD) | Ensure `deepseek.bat` is in a directory on your `PATH` |
-| | macOS/Linux | Run `type deepseek` to check if the function or script is loaded |
-| **Permission denied (script)** | macOS/Linux | `chmod +x deepseek.sh` |
-| **Thinking mode not working** | All | DeepSeek V4 Pro natively supports thinking - no extra configuration needed |
+| Issue                                | Platform      | Solution                                                                           |
+| ------------------------------------ | ------------- | ---------------------------------------------------------------------------------- |
+| **Context shows 200K instead of 1M** | All           | Verify the `[1m]` suffix is present in `ANTHROPIC_MODEL`                           |
+| **API authentication error**         | All           | Confirm `DEEPSEEK_API_KEY` is set                                                  |
+|                                      | Windows       | `echo $env:DEEPSEEK_API_KEY` (PowerShell) or `echo %DEEPSEEK_API_KEY%` (CMD)       |
+|                                      | macOS/Linux   | `echo $DEEPSEEK_API_KEY`                                                           |
+| **`claude` command not found**       | All           | Reinstall: `npm install -g @anthropic-ai/claude-code@2.1.154`                      |
+| **`deepseek` not recognized**        | Windows (PS)  | `notepad $PROFILE.CurrentUserCurrentHost` - verify the function is in your profile |
+|                                      | Windows (CMD) | Ensure `deepseek.bat` is in a directory on your `PATH`                             |
+|                                      | macOS/Linux   | Run `type deepseek` to check if the function or script is loaded                   |
+| **Permission denied (script)**       | macOS/Linux   | `chmod +x deepseek.sh`                                                             |
+| **Thinking mode not working**        | All           | DeepSeek V4 Pro natively supports thinking - no extra configuration needed         |
 
 ---
 
 ## Files
 
-| File | Platform | Purpose |
-|---|---|---|
-| `deepseek.bat` | Windows | Batch launcher for CMD |
-| `Microsoft.PowerShell_profile.ps1` | Windows | PowerShell function - paste into your profile |
-| `deepseek.sh` | macOS / Linux | Shell script - make executable, place on `PATH` |
-| `shell-profile.sh` | macOS / Linux | Shell function - paste into `.bashrc` / `.zshrc` |
-| `README.md` | All | This document |
+| File                               | Platform      | Purpose                                          |
+| ---------------------------------- | ------------- | ------------------------------------------------ |
+| `deepseek.bat`                     | Windows       | Batch launcher for CMD                           |
+| `Microsoft.PowerShell_profile.ps1` | Windows       | PowerShell function - paste into your profile    |
+| `deepseek.sh`                      | macOS / Linux | Shell script - make executable, place on `PATH`  |
+| `shell-profile.sh`                 | macOS / Linux | Shell function - paste into `.bashrc` / `.zshrc` |
+| `README.md`                        | All           | This document                                    |
 
 ---
 
