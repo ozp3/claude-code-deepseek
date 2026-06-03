@@ -1,4 +1,4 @@
-# Claude Code with DeepSeek API - 1M Context Window
+DeepSeek API - 1M Context Window
 
 Run Claude Code at full capability - file I/O, terminal commands, MCP tools, subagents - powered by **DeepSeek V4 Pro** via the Anthropic-compatible endpoint. No Anthropic API key required.
 
@@ -104,9 +104,9 @@ Key takeaways: DS-V4-Pro leads on coding benchmarks (LiveCodeBench 93.5, Codefor
 ## Prerequisites
 
 - **Node.js** ≥ 18 - [nodejs.org](https://nodejs.org)
-- **Claude Code** `v2.1.159` installed globally:
+- **Claude Code** installed globally:
   ```bash
-  npm install -g @anthropic-ai/claude-code@2.1.159
+  npm install -g @anthropic-ai/claude-code
   ```
 - **DeepSeek API key** - [platform.deepseek.com/api_keys](https://platform.deepseek.com/api_keys)
 
